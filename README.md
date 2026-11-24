@@ -1,51 +1,65 @@
-# NillyCalc Pro — Ultra-Light Windows 11 & Graphic Designer Calculator
+# NillyCalc Pro | Print & DPI Calculator
 
-> **Πανάλαφρο (μόλις 71 KB!), 100% Native Windows 11-Style Κομπιουτεράκι φτιαγμένο ειδικά για Γραφίστες, Τυπογραφεία & Επιχειρήσεις.**
-> **Πιο ελαφρύ από το Microsoft Windows Calculator (`18,2 MB` → `0,07 MB`, 262× μικρότερο!) με 0 MB background RAM — και ταυτόχρονα Μετατροπέας `px · mm · cm · in · pt · pc · DPI`, CMYK & Πιπέτα Οθόνης (`Color Picker`) και Υπολογιστής ΦΠΑ & `m²`!**
->
-> **created by [Nilly graphics (Sotiris Christos)](https://nillygraphics.com/)**
+**Windows 10/11 · MIT · Δωρεάν 0€ / Free €0**
 
----
+Created by [Nilly graphics (Nillygraphics · Sotiris Christos)](https://nillygraphics.com/).
 
-## Γιατί NillyCalc Pro αντί για Windows Calculator;
+[Ελληνική σελίδα προϊόντος](https://nillygraphics.com/product/nillycalc-pro/el/) · [English product page](https://nillygraphics.com/product/nillycalc-pro/en/) · [GitHub Release v1.0](https://github.com/nillynp/nillycalc-pro/releases/tag/v1.0)
 
-| Λύση | Μέγεθος στον δίσκο | Background RAM | Print Units (`in/mm/cm/pt/px/DPI`) | CMYK & Πιπέτα Οθόνης | ΦΠΑ Ελλάδας & `m²` |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Microsoft Windows Calculator | **18,2 MB** | WinUI / UWP | Όχι | Όχι | Όχι |
-| **NillyCalc Pro** | **0,07 MB (71 KB)** | **0 MB** | **Ναι (6 μονάδες + Bleed + Presets)** | **Ναι (Live Pixel Loupe + TAC%)** | **Ναι (24%/13%/6% + m²)** |
+## Ελληνικά
 
----
+Υπολογιστής DPI, CMYK, χρώματος, ΦΠΑ και κόστους ανά m².
 
-## 4 Εργαλεία σε 1 (με αυθεντικό Windows 11 Dark / Light Design)
+[Κατέβασε το ενημερωμένο ZIP](https://github.com/nillynp/nillycalc-pro/releases/download/v1.0/NillyCalc-Pro-v1.0-Portable-SEO.zip)
 
-1. **`Standard` (`Ctrl+1`) — Αυθεντικό Windows 11 Κομπιουτεράκι:**
-   - Κλασικό Windows 11 dark (`#202020`) & light theme με στρογγυλεμένα κουμπιά, πλήρη υποστήριξη Numpad/πληκτρολογίου, μνήμη (`MC/MR/M+/M-`), **Ιστορικό πράξεων**, **Always-on-Top Pin (`Ctrl+T`)**, και άμεσα κουμπιά **`+24%`** / **`÷1.24`**!
-2. **`Print · DPI` (`Ctrl+2`) — Prepress & Μονάδες Γραφίστα:**
-   - Αμφίδρομη ζωντανή μετατροπή ταυτόχρονα σε **`px` · `mm` · `cm` · `in` · `pt` · `pc` (picas)** για οποιοδήποτε **DPI (`72 / 96 / 150 / 300 / 600` ή custom)**.
-   - Έτοιμα presets: **`A0`–`A5`**, **Επαγγελματική Κάρτα (`85×55 mm`)**, **Roll-Up (`85×200 cm`)**, **Instagram Post / Story**, **Full HD / 4K**.
-   - Αυτόματος υπολογισμός **Bleed (`+3mm/+5mm`)**, **Aspect Ratio**, **Megapixels**, εκτίμηση όγκου **CMYK Raw MB**, και **Proportional Scale Lock** (δίνεις νέο Πλάτος → υπολογίζει ακριβές Ύψος)!
-3. **`CMYK · Color` (`Ctrl+3`) — Color Studio + Πιπέτα Οθόνης (`Ctrl+Shift+C`):**
-   - **Κουμπί `Pick` πάντα επάνω στη μπάρα:** Πιπέτα οθόνης με **μεγεθυντικό πλέγμα 11×11 pixels (Loupe)** που διαβάζει ζωντανά **`#HEX`**, **`RGB`** & **`CMYK`** από ΟΠΟΙΟΔΗΠΟΤΕ σημείο της οθόνης σου (Photoshop, Chrome, PDF, Illustrator)!
-   - Αμφίδρομη μετατροπή **`HEX` ↔ `RGB` ↔ `CMYK` ↔ `HSL`** με 1-κλικ Copy.
-   - Έλεγχος **Total Ink Coverage (`TAC% = C+M+Y+K`)** με ειδοποίηση αν ξεπερνά `300%` για εκτύπωση offset, **WCAG Contrast** (λευκό ή μαύρο κείμενο), 5 αυτόματες αποχρώσεις (Tints & Shades) & πρόσφατα χρώματα!
-4. **`ΦΠΑ · m²` (`Ctrl+4`) — Τιμολόγηση, ΦΠΑ & Επιφάνειες Εκτύπωσης:**
-   - Διπλής κατεύθυνσης υπολογιστής **ΦΠΑ Ελλάδας (`24%`, `13%`, `6%`, `17%`, custom)** — Καθαρή ↔ Τελική (Αποφορολόγηση) + Έκπτωση `%` + 1-κλικ Copy σύνοψης.
-   - Υπολογιστής **`m²` & Κόστους Υλικού** (βινύλια, αυτοκόλλητα, μουσαμάς, επιγραφές, βαφές): `Πλάτος × Ύψος` (`cm/mm/m`) × Τεμάχια × `€/m²` + ΦΠΑ → Εμβαδόν, Περίμετρος & έτοιμη προσφορά για Viber/Email!
+Περίπου 72 KB για το εκτελέσιμο. Το αρχικό Portable ZIP είναι 80,7 KiB. Το ZIP περιέχει έτοιμο εκτελέσιμο για άμεση εκκίνηση.
 
----
+1. Αποσυμπίεσε το ZIP σε δικό του φάκελο.
+2. Τρέξε το `Install_NillyCalcPro.bat` για την εγκατάσταση στον λογαριασμό σου.
 
-## Εγκατάσταση σε ΟΠΟΙΟΔΗΠΟΤΕ Windows 10/11 PC (100% Portable · Χωρίς Admin)
+### Συχνές ερωτήσεις
 
-1. Κατέβασε το **`NillyCalc-Pro-v1.0-Portable.zip`** και αποσυμπίεσέ το όπου θες (π.χ. `C:\Tools\NillyCalcPro`).
-2. Τρέξε με διπλό κλικ το **`Install_NillyCalcPro.bat`** *(Zero Admin — δεν απαιτεί δικαιώματα Διαχειριστή!)*.
-   - Μεταγλωττίζει αυτόματα το 100% native **`NillyCalcPro.exe`** με τον ενσωματωμένο .NET compiler των Windows (0 εξωτερικά DLLs / 0 downloads) και φτιάχνει συντομεύσεις σε Επιφάνεια Εργασίας & Start Menu.
+**Πώς μετατρέπω pixels σε χιλιοστά για εκτύπωση;**
 
-### Απεγκατάσταση
-Τρέξε το **`Uninstall_NillyCalcPro.bat`** για καθαρή αφαίρεση συντομεύσεων.
+Άνοιξε το Print & DPI Studio, όρισε τα DPI και συμπλήρωσε την τιμή σε pixels. Οι τιμές σε mm, cm και ίντσες ενημερώνονται αυτόματα.
 
----
+**Μπορώ να πάρω χρώμα από την οθόνη;**
 
-## Πιστώσεις & Άδεια
-- **Δημιουργός:** **created by [Nilly graphics (Sotiris Christos)](https://nillygraphics.com/)**
-- **Άδεια:** MIT License — **100% Δωρεάν (0€)**
-- **Οικοσύστημα Nilly (Δωρεάν Εργαλεία):** [NillyView Pro](https://github.com/nillynp/nillyview-pro) · [NillyCode Pro](https://github.com/nillynp/nillycode-pro) · [NillyDoc Pro](https://github.com/nillynp/nillydoc-pro) · [Nilly PC Manager & Tools](https://github.com/nillynp/nilly-pc-manager-tools)
+Πάτησε Pick ή Ctrl+Shift+C για να δειγματοληπτήσεις ένα pixel και να δεις τις τιμές του σε HEX, RGB και CMYK.
+
+**Υπολογίζει ΦΠΑ και κόστος εκτύπωσης;**
+
+Η καρτέλα ΦΠΑ και m² υπολογίζει ποσά με ή χωρίς ΦΠΑ και κόστος υλικού με βάση τις διαστάσεις και την τιμή ανά τετραγωνικό μέτρο.
+
+## English
+
+DPI, CMYK, color, VAT and cost-per-area calculator.
+
+[Download the updated ZIP](https://github.com/nillynp/nillycalc-pro/releases/download/v1.0/NillyCalc-Pro-v1.0-Portable-SEO.zip)
+
+The executable is approximately 72 KB. The original portable ZIP is 80.7 KiB. The ZIP includes a ready-to-run executable.
+
+1. Extract the ZIP to its own folder.
+2. Run `Install_NillyCalcPro.bat` to set it up for your Windows user.
+
+### Frequently asked questions
+
+**How do I convert pixels to millimetres for print?**
+
+Open Print & DPI Studio, set your DPI and enter the pixel value. The values in mm, cm and inches update automatically.
+
+**Can I pick colors from my screen?**
+
+Press Pick or Ctrl+Shift+C to sample a pixel and see its HEX, RGB and CMYK values.
+
+**Does it calculate VAT and printing costs?**
+
+The VAT and area tab calculates net and gross amounts and material costs from dimensions and a price per square metre.
+
+## Περισσότερα εργαλεία / More tools
+
+[NillyCode Pro](https://github.com/nillynp/nillycode-pro) · [NillyBatch Pro](https://github.com/nillynp/nillybatch-pro) · [NillyMedia Lite](https://github.com/nillynp/nillymedia-lite)
+
+## License
+
+MIT. See [LICENSE](LICENSE).
