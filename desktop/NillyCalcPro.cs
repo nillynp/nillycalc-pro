@@ -24,8 +24,8 @@ using System.Windows.Forms;
 [assembly: AssemblyCompany("Nilly graphics (Sotiris Christos) — https://nillygraphics.com/")]
 [assembly: AssemblyProduct("NillyCalc Pro")]
 [assembly: AssemblyCopyright("Copyright (c) 2026 Nilly graphics (Sotiris Christos)")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
 
 namespace NillyCalcPro
 {
@@ -38,6 +38,22 @@ namespace NillyCalcPro
 
         [DllImport("user32.dll")]
         public static extern bool SetProcessDPIAware();
+
+        [DllImport("kernel32.dll")]
+        private static extern IntPtr GetCurrentProcess();
+
+        [DllImport("kernel32.dll")]
+        private static extern bool SetProcessWorkingSetSize(IntPtr hProcess, IntPtr minSize, IntPtr maxSize);
+
+        public static void TrimMemory()
+        {
+            try
+            {
+                GC.Collect(GC.MaxGeneration, GCCollectionMode.Optimized, false);
+                SetProcessWorkingSetSize(GetCurrentProcess(), (IntPtr)(-1), (IntPtr)(-1));
+            }
+            catch { }
+        }
 
         [DllImport("dwmapi.dll")]
         public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
@@ -1294,7 +1310,7 @@ namespace NillyCalcPro
             double w, h, bleed;
             if (!StudioMath.TryParseNum(_txtCanvasW.Text, out w) || !StudioMath.TryParseNum(_txtCanvasH.Text, out h) || w <= 0 || h <= 0)
             {
-                _lblCanvasSpecs.Text = "Enter valid Width & Height...";
+                _lblCanvasSpecs.Text = "Enter valid Width && Height...";
                 return;
             }
             if (!StudioMath.TryParseNum(_txtBleed.Text, out bleed) || bleed < 0) bleed = 0;
@@ -1982,7 +1998,9 @@ namespace NillyCalcPro
                     if (h != IntPtr.Zero) { Native.ShowWindow(h, Native.SW_RESTORE); Native.SetForegroundWindow(h); }
                     return 0;
                 }
-                Application.Run(new MainForm());
+                MainForm mf = new MainForm();
+                mf.Shown += delegate { Native.TrimMemory(); };
+                Application.Run(mf);
             }
             return 0;
         }
