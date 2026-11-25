@@ -24,8 +24,8 @@ using System.Windows.Forms;
 [assembly: AssemblyCompany("Nilly graphics (Sotiris Christos) — https://nillygraphics.com/")]
 [assembly: AssemblyProduct("NillyCalc Pro")]
 [assembly: AssemblyCopyright("Copyright (c) 2026 Nilly graphics (Sotiris Christos)")]
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
 
 namespace NillyCalcPro
 {
@@ -627,7 +627,9 @@ namespace NillyCalcPro
             get { return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "NillyCalcPro\\settings.ini"); }
         }
 
-        public MainForm()
+        public MainForm() : this(null) { }
+
+        public MainForm(string initialHex)
         {
             this.Text = "NillyCalc Pro";
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -660,6 +662,16 @@ namespace NillyCalcPro
             SetStudioColor(_curColor, false);
             RecalcVatFromNet();
             RecalcM2();
+
+            if (!string.IsNullOrEmpty(initialHex))
+            {
+                Color parsedHex;
+                if (StudioMath.TryParseHex(initialHex, out parsedHex))
+                {
+                    SwitchTab(2);
+                    SetStudioColor(parsedHex, true);
+                }
+            }
 
             _toastTimer = new System.Windows.Forms.Timer();
             _toastTimer.Interval = 1600;
@@ -2028,16 +2040,26 @@ namespace NillyCalcPro
         {
             try
             {
-                if (!File.Exists(SettingsPath)) return;
-                string[] lines = File.ReadAllLines(SettingsPath, Encoding.UTF8);
-                for (int i = 0; i < lines.Length; i++)
+                string suiteTheme = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"NillySuite\suite.theme");
+                bool hasLocal = File.Exists(SettingsPath);
+                if (hasLocal)
                 {
-                    int eq = lines[i].IndexOf('=');
-                    if (eq <= 0) continue;
-                    string k = lines[i].Substring(0, eq).Trim();
-                    string v = lines[i].Substring(eq + 1).Trim();
-                    if (k == "Theme" && v == "Light") _theme = CalcTheme.Win11Light();
-                    else if (k == "Pin" && v == "1") { _pinned = true; this.TopMost = true; _btnPin.IsToggled = true; }
+                    string[] lines = File.ReadAllLines(SettingsPath, Encoding.UTF8);
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        int eq = lines[i].IndexOf('=');
+                        if (eq <= 0) continue;
+                        string k = lines[i].Substring(0, eq).Trim();
+                        string v = lines[i].Substring(eq + 1).Trim();
+                        if (k == "Theme" && v == "Light") _theme = CalcTheme.Win11Light();
+                        else if (k == "Pin" && v == "1") { _pinned = true; this.TopMost = true; _btnPin.IsToggled = true; }
+                    }
+                }
+                if (File.Exists(suiteTheme) && (!hasLocal || File.GetLastWriteTimeUtc(suiteTheme) > File.GetLastWriteTimeUtc(SettingsPath)))
+                {
+                    string s = File.ReadAllText(suiteTheme, Encoding.ASCII).Trim();
+                    if (s.Equals("light", StringComparison.OrdinalIgnoreCase)) _theme = CalcTheme.Win11Light();
+                    else if (s.Equals("dark", StringComparison.OrdinalIgnoreCase)) _theme = CalcTheme.Win11Dark();
                 }
             }
             catch { }
@@ -2072,16 +2094,26 @@ namespace NillyCalcPro
             if (args != null && args.Length > 0 && args[0] == "--test-smoke")
                 return RunSmokeTest(args.Length > 1 ? args[1] : null);
 
+            string initHex = null;
+            if (args != null)
+            {
+                for (int i = 0; i < args.Length; i++)
+                {
+                    if (args[i].Equals("--hex", StringComparison.OrdinalIgnoreCase) && i + 1 < args.Length) { initHex = args[i + 1]; break; }
+                    if (args[i].StartsWith("#") && (args[i].Length == 4 || args[i].Length == 7)) { initHex = args[i]; break; }
+                }
+            }
+
             bool createdNew;
             using (Mutex m = new Mutex(true, "NillyCalcPro_SingleInstance_" + Environment.UserName.Replace(" ", "_"), out createdNew))
             {
-                if (!createdNew)
+                if (!createdNew && string.IsNullOrEmpty(initHex))
                 {
                     IntPtr h = Native.FindWindow(null, "NillyCalc Pro");
                     if (h != IntPtr.Zero) { Native.ShowWindow(h, Native.SW_RESTORE); Native.SetForegroundWindow(h); }
                     return 0;
                 }
-                MainForm mf = new MainForm();
+                MainForm mf = new MainForm(initHex);
                 mf.Shown += delegate { Native.TrimMemory(); };
                 Application.Run(mf);
             }
