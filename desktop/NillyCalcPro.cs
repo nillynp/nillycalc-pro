@@ -24,8 +24,8 @@ using System.Windows.Forms;
 [assembly: AssemblyCompany("Nilly graphics (Sotiris Christos) — https://nillygraphics.com/")]
 [assembly: AssemblyProduct("NillyCalc Pro")]
 [assembly: AssemblyCopyright("Copyright (c) 2026 Nilly graphics (Sotiris Christos)")]
-[assembly: AssemblyVersion("1.0.1.0")]
-[assembly: AssemblyFileVersion("1.0.1.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
 
 namespace NillyCalcPro
 {
@@ -686,6 +686,71 @@ namespace NillyCalcPro
             catch { }
         }
 
+        private static string FindSiblingExe(string folder, string exeName)
+        {
+            try
+            {
+                string appData = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"NillySuite\" + folder + @"\" + exeName);
+                if (File.Exists(appData)) return appData;
+                string baseDir = AppDomain.CurrentDomain.BaseDirectory.TrimEnd('\\');
+                DirectoryInfo par = Directory.GetParent(baseDir);
+                if (par != null)
+                {
+                    string sib = Path.Combine(Path.Combine(par.FullName, folder), exeName);
+                    if (File.Exists(sib)) return sib;
+                }
+            }
+            catch { }
+            return null;
+        }
+
+        private void SendToNillyNote()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("=== NillyCalc Pro — Σύνοψη Υπολογισμών ===");
+            sb.AppendLine("Ημερομηνία: " + DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
+            sb.AppendLine("created by Nilly graphics (Sotiris Christos) — nillygraphics.com");
+            sb.AppendLine("");
+            if (_lblDisp != null) sb.AppendLine("Τρέχον Αποτέλεσμα:  " + _lblDisp.Text);
+            if (_lblExpr != null && !string.IsNullOrEmpty(_lblExpr.Text)) sb.AppendLine("Πράξη:  " + _lblExpr.Text);
+            if (_history.Count > 0)
+            {
+                sb.AppendLine("");
+                sb.AppendLine("--- Ιστορικό Πράξεων ---");
+                for (int i = 0; i < _history.Count; i++) sb.AppendLine("  • " + _history[i]);
+            }
+            if (_lblCanvasSpecs != null && !string.IsNullOrEmpty(_lblCanvasSpecs.Text))
+            {
+                sb.AppendLine("");
+                sb.AppendLine("--- Print & DPI ---");
+                sb.AppendLine(_lblCanvasSpecs.Text);
+            }
+            if (_txtVatNet != null && _txtVatGross != null)
+            {
+                sb.AppendLine("");
+                sb.AppendLine("--- ΦΠΑ & m² ---");
+                sb.AppendLine("Καθαρή: " + _txtVatNet.Text + " €  |  Τελική με ΦΠΑ: " + _txtVatGross.Text + " €");
+                if (_lblM2Result != null && !string.IsNullOrEmpty(_lblM2Result.Text))
+                    sb.AppendLine(_lblM2Result.Text);
+            }
+
+            string content = sb.ToString();
+            string noteExe = FindSiblingExe("NillyNotePro", "NillyNotePro.exe");
+            if (!string.IsNullOrEmpty(noteExe))
+            {
+                try
+                {
+                    string tmp = Path.Combine(Path.GetTempPath(), "NillyCalc_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt");
+                    File.WriteAllText(tmp, content, new UTF8Encoding(false));
+                    Process.Start(new ProcessStartInfo(noteExe, "\"" + tmp + "\"") { WorkingDirectory = Path.GetDirectoryName(noteExe), UseShellExecute = true });
+                    ShowToast("↗ Εστάλη στο NillyNote Pro!");
+                    return;
+                }
+                catch { }
+            }
+            try { Clipboard.SetText(content); ShowToast("✓ Αντιγράφηκε η σύνοψη στο πρόχειρο (βάλε NillyNote Pro για άμεσο άνοιγμα)"); } catch { }
+        }
+
         private void BuildUI()
         {
             // 1. Top Compact Win11 Header Bar (Tabs + Color Picker Pipette + Pin + Theme)
@@ -745,13 +810,31 @@ namespace NillyCalcPro
             tip.SetToolTip(_btnPin, "Keep on Top / Καρφίτσωμα (Ctrl+T)");
             tip.SetToolTip(_btnTheme, "Switch Dark / Light Windows 11 Theme");
 
-            // 2. Subtle Bottom Footer / Toast
+            // 2. Subtle Bottom Footer / Toast + 1-Click Send to NillyNote Pro
+            Panel footerBar = new Panel();
+            footerBar.Dock = DockStyle.Bottom;
+            footerBar.Height = 28;
+            footerBar.Padding = new Padding(0, 1, 8, 3);
+
             _lblToast = new Label();
-            _lblToast.Dock = DockStyle.Bottom;
-            _lblToast.Height = 24;
-            _lblToast.TextAlign = ContentAlignment.MiddleCenter;
-            _lblToast.Font = new Font("Segoe UI", 8f);
-            _lblToast.Text = "NillyCalc Pro · Nilly graphics (Ctrl+1..4 tabs · Ctrl+Shift+C Pipette)";
+            _lblToast.Dock = DockStyle.Fill;
+            _lblToast.TextAlign = ContentAlignment.MiddleLeft;
+            _lblToast.Padding = new Padding(8, 0, 4, 0);
+            _lblToast.Font = new Font("Segoe UI", 7.8f);
+            _lblToast.Text = "NillyCalc Pro · Nilly graphics (Ctrl+1..4 tabs)";
+
+            Win11Button btnSendNote = new Win11Button();
+            btnSendNote.Text = "↗ NillyNote";
+            btnSendNote.Dock = DockStyle.Right;
+            btnSendNote.Width = 84;
+            btnSendNote.Font = new Font("Segoe UI", 8.0f, FontStyle.Bold);
+            btnSendNote.StyleKind = Win11BtnStyle.StudioPill;
+            btnSendNote.CornerRadius = 4;
+            btnSendNote.Click += delegate { SendToNillyNote(); };
+            tip.SetToolTip(btnSendNote, "Αποστολή αποτελέσματος, ιστορικού & ΦΠΑ/m² απευθείας σε NillyNote Pro");
+
+            footerBar.Controls.Add(_lblToast);
+            footerBar.Controls.Add(btnSendNote);
 
             // 3. Content Host
             _contentHost = new Panel();
@@ -771,7 +854,7 @@ namespace NillyCalcPro
             }
 
             this.Controls.Add(_contentHost);
-            this.Controls.Add(_lblToast);
+            this.Controls.Add(footerBar);
             this.Controls.Add(_topBar);
         }
 
