@@ -24,8 +24,8 @@ using System.Windows.Forms;
 [assembly: AssemblyCompany("Nilly graphics (Sotiris Christos) — https://nillygraphics.com/")]
 [assembly: AssemblyProduct("NillyCalc Pro")]
 [assembly: AssemblyCopyright("Copyright (c) 2026 Nilly graphics (Sotiris Christos)")]
-[assembly: AssemblyVersion("1.2.1.0")]
-[assembly: AssemblyFileVersion("1.2.1.0")]
+[assembly: AssemblyVersion("1.2.2.0")]
+[assembly: AssemblyFileVersion("1.2.2.0")]
 
 namespace NillyCalcPro
 {
@@ -110,26 +110,26 @@ namespace NillyCalcPro
         {
             CalcTheme t = new CalcTheme();
             t.IsDark = true;
-            t.WindowBg = Color.FromArgb(32, 32, 32);       // #202020 exact Win11 Calc
-            t.CardBg = Color.FromArgb(43, 43, 43);         // #2B2B2B
-            t.CardBorder = Color.FromArgb(58, 58, 58);     // #3A3A3A
-            t.TextPrimary = Color.FromArgb(255, 255, 255);
-            t.TextMuted = Color.FromArgb(166, 166, 166);
-            t.NumBtnBg = Color.FromArgb(59, 59, 59);       // #3B3B3B Win11 digits
-            t.NumBtnHover = Color.FromArgb(50, 50, 50);    // #323232
-            t.NumBtnPress = Color.FromArgb(40, 40, 40);
-            t.OpBtnBg = Color.FromArgb(50, 50, 50);        // #323232 Win11 ops
-            t.OpBtnHover = Color.FromArgb(59, 59, 59);
-            t.OpBtnPress = Color.FromArgb(42, 42, 42);
-            t.AccentBg = Color.FromArgb(76, 194, 255);     // #4CC2FF Win11 Sky Accent
-            t.AccentHover = Color.FromArgb(66, 178, 236);
-            t.AccentText = Color.FromArgb(0, 0, 0);
-            t.StudioAccent = Color.FromArgb(253, 151, 31); // #FD971F Nilly Studio Amber
-            t.InputBg = Color.FromArgb(30, 30, 30);
-            t.InputBorder = Color.FromArgb(72, 72, 72);
-            t.TabActiveBg = Color.FromArgb(55, 55, 55);
-            t.DangerColor = Color.FromArgb(255, 107, 107);
-            t.OkColor = Color.FromArgb(108, 203, 95);
+            t.WindowBg = Color.FromArgb(24, 26, 31);       // #181A1F unified Nilly Dark
+            t.CardBg = Color.FromArgb(31, 34, 41);         // #1F2229
+            t.CardBorder = Color.FromArgb(52, 57, 68);     // #343944
+            t.TextPrimary = Color.FromArgb(236, 239, 244);
+            t.TextMuted = Color.FromArgb(148, 157, 174);
+            t.NumBtnBg = Color.FromArgb(39, 43, 52);       // #272B34
+            t.NumBtnHover = Color.FromArgb(49, 54, 66);    // #313642
+            t.NumBtnPress = Color.FromArgb(31, 34, 41);
+            t.OpBtnBg = Color.FromArgb(33, 37, 45);
+            t.OpBtnHover = Color.FromArgb(44, 49, 60);
+            t.OpBtnPress = Color.FromArgb(28, 31, 38);
+            t.AccentBg = Color.FromArgb(252, 150, 31);     // #FC961F Nilly Orange
+            t.AccentHover = Color.FromArgb(236, 134, 20);
+            t.AccentText = Color.FromArgb(20, 22, 26);
+            t.StudioAccent = Color.FromArgb(252, 150, 31); // #FC961F Nilly Orange
+            t.InputBg = Color.FromArgb(28, 30, 36);
+            t.InputBorder = Color.FromArgb(52, 57, 68);
+            t.TabActiveBg = Color.FromArgb(49, 54, 66);
+            t.DangerColor = Color.FromArgb(249, 38, 114);
+            t.OkColor = Color.FromArgb(166, 226, 46);
             return t;
         }
 
@@ -137,26 +137,26 @@ namespace NillyCalcPro
         {
             CalcTheme t = new CalcTheme();
             t.IsDark = false;
-            t.WindowBg = Color.FromArgb(243, 243, 243);    // #F3F3F3 exact Win11 Light
-            t.CardBg = Color.FromArgb(252, 252, 252);
-            t.CardBorder = Color.FromArgb(224, 224, 224);
-            t.TextPrimary = Color.FromArgb(26, 26, 26);
-            t.TextMuted = Color.FromArgb(102, 102, 102);
+            t.WindowBg = Color.FromArgb(248, 249, 251);    // #F8F9FB unified Nilly Light
+            t.CardBg = Color.FromArgb(238, 241, 246);
+            t.CardBorder = Color.FromArgb(210, 216, 226);
+            t.TextPrimary = Color.FromArgb(28, 32, 40);
+            t.TextMuted = Color.FromArgb(98, 108, 125);
             t.NumBtnBg = Color.FromArgb(255, 255, 255);
-            t.NumBtnHover = Color.FromArgb(246, 246, 246);
-            t.NumBtnPress = Color.FromArgb(236, 236, 236);
-            t.OpBtnBg = Color.FromArgb(249, 249, 249);
-            t.OpBtnHover = Color.FromArgb(240, 240, 240);
-            t.OpBtnPress = Color.FromArgb(230, 230, 230);
-            t.AccentBg = Color.FromArgb(0, 103, 192);      // #0067C0 Win11 Blue
-            t.AccentHover = Color.FromArgb(24, 118, 200);
+            t.NumBtnHover = Color.FromArgb(236, 240, 246);
+            t.NumBtnPress = Color.FromArgb(224, 230, 238);
+            t.OpBtnBg = Color.FromArgb(242, 245, 249);
+            t.OpBtnHover = Color.FromArgb(230, 235, 243);
+            t.OpBtnPress = Color.FromArgb(218, 225, 235);
+            t.AccentBg = Color.FromArgb(224, 118, 12);     // #E0760C Nilly Orange Light
+            t.AccentHover = Color.FromArgb(204, 104, 8);
             t.AccentText = Color.White;
-            t.StudioAccent = Color.FromArgb(217, 107, 0);
+            t.StudioAccent = Color.FromArgb(224, 118, 12);
             t.InputBg = Color.White;
-            t.InputBorder = Color.FromArgb(204, 204, 204);
-            t.TabActiveBg = Color.FromArgb(230, 230, 230);
-            t.DangerColor = Color.FromArgb(196, 43, 28);
-            t.OkColor = Color.FromArgb(15, 123, 15);
+            t.InputBorder = Color.FromArgb(210, 216, 226);
+            t.TabActiveBg = Color.FromArgb(226, 232, 242);
+            t.DangerColor = Color.FromArgb(204, 28, 92);
+            t.OkColor = Color.FromArgb(62, 145, 32);
             return t;
         }
     }
