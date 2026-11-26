@@ -24,8 +24,8 @@ using System.Windows.Forms;
 [assembly: AssemblyCompany("Nilly graphics (Sotiris Christos) — https://nillygraphics.com/")]
 [assembly: AssemblyProduct("NillyCalc Pro")]
 [assembly: AssemblyCopyright("Copyright (c) 2026 Nilly graphics (Sotiris Christos)")]
-[assembly: AssemblyVersion("1.2.0.0")]
-[assembly: AssemblyFileVersion("1.2.0.0")]
+[assembly: AssemblyVersion("1.2.1.0")]
+[assembly: AssemblyFileVersion("1.2.1.0")]
 
 namespace NillyCalcPro
 {
@@ -809,7 +809,7 @@ namespace NillyCalcPro
             _topBar.Controls.Add(_btnPin);
 
             _btnTheme = new Win11Button();
-            _btnTheme.Text = "☀";
+            _btnTheme.Text = "◐";
             _btnTheme.Font = new Font("Segoe UI", 10f);
             _btnTheme.StyleKind = Win11BtnStyle.Subtle;
             _btnTheme.CornerRadius = 5;
@@ -1934,7 +1934,7 @@ namespace NillyCalcPro
             this.BackColor = t.WindowBg;
             this.ForeColor = t.TextPrimary;
             if (this.IsHandleCreated) Native.SetDarkTitleBar(this.Handle, t.IsDark);
-            _btnTheme.Text = t.IsDark ? "☀" : "🌙";
+            _btnTheme.Text = "◐";
             _lblToast.BackColor = t.WindowBg;
             _lblToast.ForeColor = t.TextMuted;
             _topBar.BackColor = t.WindowBg;
